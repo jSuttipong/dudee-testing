@@ -20,10 +20,10 @@
           </div>
         </div>
       </div>
-      <div class="wm-modal" v-if="isActiveModal">
+    </div>
+    <div class="wm-modal" v-if="isActiveModal">
         <WmModal :machineId="machineActiveId" @closeModal="handleModal()" />
       </div>
-    </div>
   </div>
 </template>
 
@@ -75,14 +75,6 @@ const goBack = () =>{
     router.push('/');
 }
 
-// onMounted(() => {
-//   washingMachines.value.forEach((machine) => {
-//     const machineStore = useMachineStore(machine.id);
-//     // machineStore.setTime(100); // Example time setup
-//     // machineStore.setAvailable(true); // Example availability setup
-//   });
-// });
-
 </script>
 <style>
 .area-container {
@@ -91,23 +83,25 @@ const goBack = () =>{
   width: 100%;
   background: #e5ecff;
   margin-top: 20px;
+ 
   padding: 3% 20px 0 20px;
   box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
   /* box-shadow: rgb(255, 255, 255) -3px -3px 6px 0px , rgba(66, 66, 66, 0.22) 4px 10px 10px; */
   border-radius: 30px;
   position: relative;
 }
-.area-container h1 {
+
+.wm-header {
+  display: flex;
+  margin-bottom: 60px;
+  position: relative;
+  height: 58px;
+}
+.wm-header h1{
   color: #000;
-  /* text-align: center; */
   left: 0;
   right: 0;
   margin: auto;
-}
-.wm-header {
-  display: flex;
-  margin-bottom: 20px;
-  position: relative;
 }
 .wm-back-arrow {
   left: 20px;
@@ -127,7 +121,28 @@ const goBack = () =>{
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
+}
+
+@media only screen and (max-width:768px){
+  .wm-back-arrow{
+    left: -10px;
+  }
+  .wm-header{
+    margin-bottom: 0;
+  }
+  .wm-header h1{
+    position: absolute;
+    left: unset;
+    right: 0;
+    margin: auto;
+  }
+}
+@media only screen and (max-width:960px){
+  .card-container{
+    width: 315px;
+    height: 335px;
+  }
 }
 </style>

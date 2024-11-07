@@ -30,7 +30,7 @@
 }
 
 .home-page-nav ul{
-  padding-inline-start: 40px;
+  padding-inline-start: 0 !important;
 }
 .home-page-nav a {
   width: auto;
@@ -51,5 +51,11 @@
   box-shadow: rgb(255, 255, 255) -4px -4px 6px 0px inset,
     rgba(66, 66, 66, 0.22) 4px 10px 10px inset;
   color: #9b9b9b;
+}
+
+@media only screen and (max-width: 480px){
+  .home-page-nav{
+    margin: 0 20px;
+  }
 }
 </style>

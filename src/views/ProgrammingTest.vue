@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="pg-header">
-      <h1>programming-test</h1>
+      <h1>Programming-test</h1>
       <BackBtn class="wm-back-arrow" @click="goBack()" />
     </div>
     <div class="test-area">
@@ -43,5 +43,13 @@ const goBack = () =>{
 }
 .pg-header h1{
     margin: auto;
+    
+}
+
+@media only screen and (max-width: 768px){
+    .pg-header h1{
+      position: absolute;
+      right: 20px;
+  }
 }
 </style>

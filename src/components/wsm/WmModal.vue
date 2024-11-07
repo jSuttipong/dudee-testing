@@ -1,25 +1,48 @@
 <template>
   <div class="modal-container">
     <div class="modal-bg"></div>
-    <BackBtn class="modal-back" @click="$emit('closeModal')" />
-    <div class="modal-content">
-      <div class="row">
-        <div class="col-xs-12 col-md-6" style="justify-items: end">
-          <div class="modal-wm-container">
-            <Wmachine :id="props.machineId" />
+    <div class="container">
+      <BackBtn class="modal-back" @click="$emit('closeModal')" />
+      <div class="modal-content">
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 m-position">
+            <div class="modal-wm-container">
+              <Wmachine :id="props.machineId" />
+            </div>
           </div>
-        </div>
 
-        <div class="ol-xs-12 col-md-6">
-          Available: {{ machineStore.available ? "Yes" : "No" }}
-          <p> {{ machineStore.available ? `Need ${coinsNeeded} $ To Start` : 'In Process' }}</p>
-          <DdBtn class="btm-area" @click="onCoinInserted()" btnTitle="Insert 10$ coin" v-if="machineStore.available" />
-          
-          <div v-if="!machineStore.available">
-            <DdBtn class="btm-area" @click="onPause()" v-if="!machineStore.isPaused" btnTitle="Pause"/>
-            <DdBtn class="btm-area" @click="onResume()" v-else btnTitle="Resume"/>
+          <div class="col-xs-12 col-sm-6 info-position">
+            Available: {{ machineStore.available ? "Yes" : "No" }}
+            <p>
+              {{
+                machineStore.available
+                  ? `Need ${coinsNeeded} $ To Start`
+                  : "In Process"
+              }}
+            </p>
+            <DdBtn
+              class="btm-area"
+              @click="onCoinInserted()"
+              btnTitle="Insert 10$ coin"
+              v-if="machineStore.available"
+            />
+
+            <div v-if="!machineStore.available">
+              <DdBtn
+                class="btm-area"
+                @click="onPause()"
+                v-if="!machineStore.isPaused"
+                btnTitle="Pause"
+              />
+              <DdBtn
+                class="btm-area"
+                @click="onResume()"
+                v-else
+                btnTitle="Resume"
+              />
+            </div>
+            <DdBtn class="btm-area" @click="onCancel()" btnTitle="Cancel" />
           </div>
-          <DdBtn class="btm-area" @click="onCancel()" btnTitle="Cancel" />
         </div>
       </div>
     </div>
@@ -28,7 +51,7 @@
 <script setup>
 import BackBtn from "../utils/BackBtn.vue";
 import Wmachine from "../wsm/Wmachine.vue";
-import DdBtn from "../utils/DdBtn.vue"
+import DdBtn from "../utils/DdBtn.vue";
 import { defineProps, ref } from "vue";
 
 const props = defineProps(["machineId"]);
@@ -46,7 +69,7 @@ const onCoinInserted = () => {
 
 const onCancel = () => {
   coinsNeeded.value = 20;
-  machineStore.clearCountdown()
+  machineStore.clearCountdown();
 };
 
 const onPause = () => {
@@ -60,7 +83,7 @@ const onResume = () => {
 .modal-container {
   width: 100%;
   height: 100%;
-  position: relative;
+  position: absolute;
   display: flex;
   align-items: center;
 }
@@ -76,17 +99,45 @@ const onResume = () => {
   -webkit-backdrop-filter: blur(9.8px);
 }
 .modal-back {
-  left: 40px;
-  top: 34px;
+  left: 15%;
+  top: 5%;
   position: absolute;
 }
 .modal-content {
-  /* position: absolute; */
   width: 100%;
 }
 .modal-wm-container {
   width: 290px;
   height: 370px;
 }
-
+.m-position {
+  justify-items: end;
+}
+@media only screen and (max-width: 960px) {
+  .modal-container {
+    width: 100vw;
+    height: 100vh;
+  }
+  .modal-back {
+    left: 5%;
+    top: 4%;
+  }
+  
+}
+@media only screen and (max-width: 768px) {
+  .m-position {
+    justify-items: center;
+    margin-bottom: 20px;
+  }
+  .info-position{
+    justify-items: center;
+  }
+  .modal-wm-container{
+    width: 278px;
+    height: 340px;
+  }
+  .modal-content .row{
+    margin-top: 80px;
+  }
+}
 </style>
