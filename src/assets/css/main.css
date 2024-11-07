@@ -20,6 +20,7 @@ html, body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color: rgb(220 225 251) !important;
   }
   
   #root {
@@ -29,4 +30,9 @@ html, body {
   h1, h2, h3, h4, h5{
     margin: 0;
   }
+
+  .btm-area{
+    width: fit-content;
+    margin: 10px 0 10px 0;
+}
   

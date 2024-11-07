@@ -1,11 +1,13 @@
 <template>
-  <div>
-    <input type="number" placeholder="Add number" v-model="inputNumber" />
-    <DdBtn btnTitle="Add" @click="handleInputData(inputNumber)" />
+  <div class="array-test">
+    <div class="input-area">
+      <input type="number" placeholder="Add number" v-model="inputNumber" />
+      <DdBtn class="btm-area" btnTitle="Add" @click="handleInputData(inputNumber)" />
+    </div>
     <!-- <p>Sample array: {{ sampleArray }}</p> -->
-    <DdBtn btnTitle="Use sample array" @click="insertArrayWithSample()" />
+    <DdBtn class="btm-area" btnTitle="Use sample array" @click="insertArrayWithSample()" />
     <p>List number: {{ arrayForSort }}</p>
-    <DdBtn btnTitle="Sort" @click="handleSortData()" />
+    <DdBtn class="btm-area" btnTitle="Sort" @click="handleSortData()" />
     <p>Output : {{ newArrayList }}</p>
   </div>
 </template>
@@ -78,3 +80,27 @@ const combine = (listA, listB) => {
   return [...listA, ...listB];
 };
 </script>
+
+<style>
+.array-test input {
+  max-width: 150px;
+  width: auto;
+  height: 50px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 20px;
+  align-self: center;
+
+}
+.array-test input:focus-visible,
+input:focus {
+  border: none;
+  outline: none;
+}
+.input-area{
+  width: 100%;
+  display: flex;
+  margin-bottom: 20px;
+}
+
+</style>
