@@ -32,8 +32,7 @@
 import Wmachine from "../components/wsm/Wmachine.vue";
 import WmModal from "../components/wsm/WmModal.vue";
 import BackBtn from "../components/utils/BackBtn.vue";
-import { ref, onMounted } from "vue";
-// import { useMachineStore } from "@/stores/machine.js";
+import { ref } from "vue";
 import router from "@/router";
 
 let washingMachines = ref([
@@ -68,7 +67,6 @@ const handleModal = (id) => {
     isActiveModal.value = true;
     machineActiveId.value = id;
   }
-  console.log("machine id ", id);
 };
 
 const goBack = () =>{

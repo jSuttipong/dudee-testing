@@ -4,9 +4,11 @@
       <div
         class="available-circle"
         :style="
-          machineStore.status
-            ? 'background: #4feb56;box-shadow: 0px 0px 20px  #4feb56;'
-            : 'background: #eb4f4f;box-shadow: 0px 0px 20px  #eb4f4f;'
+          !machineStore.status 
+            ? machineStore.isPaused ?
+            'background: #ff983d;box-shadow: 0px 0px 20px  #ff983d;' : 
+            'background: #eb4f4f;box-shadow: 0px 0px 20px  #eb4f4f;' 
+            :'background: #4feb56;box-shadow: 0px 0px 20px  #4feb56;'
         "
       >
       </div>
@@ -21,10 +23,31 @@
 
 <script setup>
 /* eslint-disable */
-import { defineProps } from "vue";
+import { defineProps, onMounted, watch, ref } from "vue";
 import { useMachineStore } from "@/stores/machine.js";
 const props = defineProps(["id"]);
 const machineStore = useMachineStore(props.id);
+const isSendedAlart = ref(false)
+
+
+onMounted(() => {
+    machineStore.initializeCountdown()
+})
+
+watch(
+    () => machineStore.countdown,
+    (countDownTimeleft) => {
+        if (countDownTimeleft < 60 && countDownTimeleft > 0 && !isSendedAlart.value) {
+          isSendedAlart.value = true
+          sentAlertToLineGroup()
+        }
+    }
+)
+
+const sentAlertToLineGroup = () => {
+  console.log(`Your washing machine ${props.id} has 1 minute left.`);
+}
+
 
 </script>
 <style>
